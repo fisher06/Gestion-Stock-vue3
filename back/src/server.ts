@@ -1,7 +1,8 @@
-// first commit
-const express = require("express");
-const serveIndex = require("serve-index");
-const api = require("./api");
+// "use strict";
+
+import express from "express";
+import serveIndex from "serve-index";
+import api from "./api";
 
 const publicDir = ".";
 
@@ -25,3 +26,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+//export default {};

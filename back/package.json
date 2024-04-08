@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "preview": "node dist/server.js",
     "format": "prettier --write"
   },
   "keywords": [],
@@ -13,9 +15,13 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@types/node": "^20.12.5",
     "eslint": "^8.57.0",
     "globals": "^15.0.0",
+    "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.4",
     "typescript-eslint": "^7.5.0"
   },
   "dependencies": {
