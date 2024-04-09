@@ -5,6 +5,7 @@ import AsyncButton from '@/components/AsyncButton.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import { onMounted } from 'vue'
+import { computed } from 'vue'
 
 const selectedArticles = ref(new Set<Article>())
 const errorMsg = ref('')
@@ -49,6 +50,10 @@ onMounted(() => {
     articleStore.refresh()
   }
 })
+
+const articles = computed(() => {
+  return articleStore.articles
+})
 </script>
 
 <template>
@@ -80,7 +85,7 @@ onMounted(() => {
         </thead>
         <tbody>
           <tr
-            v-for="a in articleStore.articles"
+            v-for="a in articles"
             :key="a.id"
             @click="select(a)"
             :class="{ selected: selectedArticles.has(a) }"
@@ -89,7 +94,7 @@ onMounted(() => {
             <td class="price number">{{ a.price }} €</td>
             <td class="qty number">{{ a.qty }}</td>
           </tr>
-          <tr v-if="articleStore.articles === undefined">
+          <tr v-if="articles === undefined">
             <td colspan="3">
               <div class="loading">
                 <fa-icon icon="fa-solid fa-circle-notch" :spin="true"></fa-icon>
