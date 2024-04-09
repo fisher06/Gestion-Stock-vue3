@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import type { Article, NewArticle } from '../interfaces/Article'
 import { api } from '../api'
 
-export const useArticleStore = defineStore('articleStore', {
+export const useArticleStore = defineStore('article', {
   state: () => ({
     articles: undefined as Article[] | undefined
   }),

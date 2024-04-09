@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
+import { mapStores } from 'pinia'
 
 interface AddView {
   newArticle: NewArticle
@@ -21,14 +22,16 @@ export default {
       errorMsg: ''
     }
   },
+  computed: {
+    ...mapStores(useArticleStore)
+  },
   methods: {
     async handleSubmit() {
       try {
         this.isAdding = true
         // take a snapshot of a the reactive newArticle data.
         const newArticle = { ...this.newArticle }
-        const articleStore = useArticleStore()
-        await articleStore.add(newArticle)
+        await this.articleStore.add(newArticle)
         await this.$router.push({ name: 'stockList' })
       } catch (err: any) {
         console.log('err: ', err)

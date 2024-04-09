@@ -1,5 +1,4 @@
 <script lang="ts">
-import { mapStores } from 'pinia'
 import type { Article } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
 import AsyncButton from '@/components/AsyncButton.vue'
@@ -22,7 +21,6 @@ export default {
       const articleStore = useArticleStore()
       return articleStore.articles
     }
-    //...mapStores(useArticleStore)
   },
   methods: {
     select(a: Article) {
