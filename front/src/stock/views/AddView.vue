@@ -1,9 +1,16 @@
 <script lang="ts">
+import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
+
+interface AddView {
+  newArticle: NewArticle
+  isAdding: boolean
+  errorMsg: string
+}
 
 export default {
   name: 'HomeView',
-  data() {
+  data(): AddView {
     return {
       newArticle: {
         name: 'Truc',
@@ -23,7 +30,7 @@ export default {
         const articleStore = useArticleStore()
         await articleStore.add(newArticle)
         await this.$router.push({ name: 'stockList' })
-      } catch (err) {
+      } catch (err: any) {
         console.log('err: ', err)
         this.errorMsg = err.message
       } finally {
@@ -58,7 +65,7 @@ export default {
       </div>
       <button class="primary" :disabled="isAdding">
         <fa-icon
-          :icon="'fa-solid ' + (this.isAdding ? 'fa-circle-notch' : 'fa-plus')"
+          :icon="'fa-solid ' + (isAdding ? 'fa-circle-notch' : 'fa-plus')"
           :spin="isAdding"
         />
         <span>Ajouter</span>

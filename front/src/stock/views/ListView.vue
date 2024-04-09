@@ -1,12 +1,15 @@
 <script lang="ts">
+import { mapStores } from 'pinia'
 import type { Article } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
 import AsyncButton from '@/components/AsyncButton.vue'
+import { RouterLink } from 'vue-router'
 
 export default {
   name: 'ListView',
   components: {
-    AsyncButton
+    AsyncButton,
+    RouterLink
   },
   data() {
     return {
@@ -19,6 +22,7 @@ export default {
       const articleStore = useArticleStore()
       return articleStore.articles
     }
+    //...mapStores(useArticleStore)
   },
   methods: {
     select(a: Article) {
@@ -67,7 +71,7 @@ export default {
       <nav>
         <AsyncButton title="Rafraîchir" :action="refresh" icon="fa-solid fa-rotate-right">
         </AsyncButton>
-        <router-link append to="add" class="button" title="Ajouter">
+        <router-link append :to="{ name: 'stockAdd' }" class="button" title="Ajouter">
           <fa-icon icon="fa-solid fa-plus" />
         </router-link>
         <AsyncButton
