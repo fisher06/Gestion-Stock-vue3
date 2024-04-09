@@ -1,45 +1,31 @@
-<script lang="ts">
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
 import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
-import { mapStores } from 'pinia'
+import { ref } from 'vue'
 
-interface AddView {
-  newArticle: NewArticle
-  isAdding: boolean
-  errorMsg: string
-}
+const newArticle = ref<NewArticle>({
+  name: 'Truc',
+  price: 0,
+  qty: 1
+})
+const isAdding = ref<boolean>(false)
+const errorMsg = ref<string>('')
+const articleStore = useArticleStore()
+const $router = useRouter()
 
-export default {
-  name: 'HomeView',
-  data(): AddView {
-    return {
-      newArticle: {
-        name: 'Truc',
-        price: 0,
-        qty: 1
-      },
-      isAdding: false,
-      errorMsg: ''
-    }
-  },
-  computed: {
-    ...mapStores(useArticleStore)
-  },
-  methods: {
-    async handleSubmit() {
-      try {
-        this.isAdding = true
-        // take a snapshot of a the reactive newArticle data.
-        const newArticle = { ...this.newArticle }
-        await this.articleStore.add(newArticle)
-        await this.$router.push({ name: 'stockList' })
-      } catch (err: any) {
-        console.log('err: ', err)
-        this.errorMsg = err.message
-      } finally {
-        this.isAdding = false
-      }
-    }
+const handleSubmit = async (): Promise<void> => {
+  try {
+    isAdding.value = true
+    // take a snapshot of a the reactive newArticle data.
+    const submiteDArticle = { ...newArticle.value }
+    await articleStore.add(submiteDArticle)
+    await $router.push({ name: 'stockList' })
+  } catch (err: any) {
+    console.log('err: ', err)
+    errorMsg.value = err.message
+  } finally {
+    isAdding.value = false
   }
 }
 </script>
