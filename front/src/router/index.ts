@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { stockRoute } from '@/stock/router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +14,8 @@ const router = createRouter({
       path: '/legal',
       name: 'legal',
       component: () => import('../views/LegalView.vue')
-    }
+    },
+    stockRoute
   ]
 })
 
