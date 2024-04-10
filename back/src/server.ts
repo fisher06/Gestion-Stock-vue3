@@ -4,7 +4,7 @@ import express from "express";
 import serveIndex from "serve-index";
 import api from "./api.js";
 
-const publicDir = ".";
+const publicDir = "../front/dist";
 
 const app = express();
 const port = 3000;
@@ -27,6 +27,10 @@ app.use(serveIndex(publicDir, { icons: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+app.get("/**", (req, res) => {
+  res.sendFile("index.html", { root: publicDir });
 });
 
 app.listen(port, () => {

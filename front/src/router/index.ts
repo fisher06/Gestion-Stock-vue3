@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 import { stockRoute } from '@/stock/router'
 
 const router = createRouter({
@@ -15,7 +16,16 @@ const router = createRouter({
       name: 'legal',
       component: () => import('../views/LegalView.vue')
     },
-    stockRoute
+    stockRoute,
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/notFound'
+    },
+    {
+      path: '/notFound',
+      name: '404',
+      component: NotFoundView
+    }
   ]
 })
 
