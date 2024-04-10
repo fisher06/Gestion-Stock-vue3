@@ -1,16 +1,13 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import type { Article } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
 import AsyncButton from '@/components/AsyncButton.vue'
-import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
-import { onMounted } from 'vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const selectedArticles = ref(new Set<Article>())
 const errorMsg = ref('')
 const articleStore = useArticleStore()
-
 const addViewRoute = {
   name: 'stockAdd'
 }
@@ -21,39 +18,37 @@ const select = (a: Article) => {
   selectedArticles.value = new Set(selectedArticles.value)
 }
 
-const remove = async () => {
-  try {
-    errorMsg.value = ''
-    const ids = [...selectedArticles.value].map((a: Article) => a.id)
-    await articleStore.remove(ids)
-    selectedArticles.value.clear()
-  } catch (err) {
-    console.log('err: ', err)
-    errorMsg.value = 'Erreur Technique'
-  }
+const remove = async (): Promise<void> => {
+  const ids = [...selectedArticles.value].map((a) => a.id)
+  await articleStore.remove(ids)
+  selectedArticles.value.clear()
 }
 
-const refresh = async () => {
-  try {
-    errorMsg.value = ''
-    console.log('refreshing')
-    await articleStore.refresh()
-    console.log('refreshed')
-  } catch (err) {
-    console.log('err: ', err)
-    errorMsg.value = 'Erreur Technique'
-  }
-}
-
-onMounted(() => {
+const initialize = async () => {
   if (articleStore.articles === undefined) {
-    articleStore.refresh()
+    try {
+      await articleStore.refresh()
+    } catch (err) {
+      console.error('err: ', err)
+      if (err instanceof Error) {
+        setError(err.message)
+        return
+      }
+      setError('Erreur Technique')
+    }
   }
-})
+}
 
-const articles = computed(() => {
-  return articleStore.articles
-})
+const articles = computed(() => articleStore.articles)
+
+const resetError = () => {
+  errorMsg.value = ''
+}
+const setError = (err: string) => {
+  errorMsg.value = err
+}
+
+initialize()
 </script>
 
 <template>
@@ -61,9 +56,15 @@ const articles = computed(() => {
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <AsyncButton title="Rafraîchir" :action="refresh" icon="fa-solid fa-rotate-right">
+        <AsyncButton
+          @start="resetError"
+          @error="setError"
+          title="Rafraîchir"
+          :action="articleStore.refresh"
+          icon="fa-solid fa-rotate-right"
+        >
         </AsyncButton>
-        <router-link append :to="addViewRoute" class="button" title="Ajouter">
+        <router-link :to="addViewRoute" class="button" title="Ajouter">
           <fa-icon icon="fa-solid fa-plus" />
         </router-link>
         <AsyncButton
@@ -71,6 +72,8 @@ const articles = computed(() => {
           title="Supprimer"
           :action="remove"
           icon="fa-solid fa-trash-can"
+          @start="resetError"
+          @error="setError"
         >
         </AsyncButton>
       </nav>
@@ -94,7 +97,7 @@ const articles = computed(() => {
             <td class="price number">{{ a.price }} €</td>
             <td class="qty number">{{ a.qty }}</td>
           </tr>
-          <tr v-if="articles === undefined">
+          <tr v-if="articles === undefined && errorMsg === ''">
             <td colspan="3">
               <div class="loading">
                 <fa-icon icon="fa-solid fa-circle-notch" :spin="true"></fa-icon>
