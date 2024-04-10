@@ -1,12 +1,22 @@
 import express from "express";
+import { randomUUID } from "node:crypto";
 import { Article, NewArticle } from "./interfaces/Article";
-import { randomUUID } from "crypto";
 
 const app = express.Router();
 
 let articles: Article[] = [
-  { id: "a1", name: "A 1", price: 10, qty: 10 },
-  { id: "a2", name: "A 2", price: 20, qty: 11 },
+  {
+    id: "a1",
+    name: "A 1",
+    price: 10,
+    qty: 10,
+  },
+  {
+    id: "a2",
+    name: "A 2",
+    price: 4,
+    qty: 2,
+  },
 ];
 
 app.get("/articles", (req, res) => {
@@ -23,11 +33,19 @@ app.post("/articles", express.json(), (req, res) => {
   res.status(201).end();
 });
 
-app.delete("/articles", express.json(), (req, res) => {
-  const ids: Article["id"][] = req.body;
-  const idsSet = new Set(ids);
-  articles = articles.filter((a) => !idsSet.has(a.id));
-  res.status(204).end();
-});
+app.delete(
+  "/articles",
+  express.json(),
+  (req: express.Request<unknown, unknown, string[]>, res) => {
+    const ids: Article["id"][] = req.body;
+    if (ids.length === 2) {
+      res.status(400).end("Interdit d'effacer deux éléments");
+      return;
+    }
+    const idsSet = new Set(ids);
+    articles = articles.filter((article) => !idsSet.has(article.id));
+    res.status(204).end();
+  },
+);
 
 export default app;

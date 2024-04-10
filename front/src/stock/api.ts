@@ -1,5 +1,5 @@
 import { sleep } from '@/utils/misc'
-import type { NewArticle } from './interfaces/Article'
+import type { Article, NewArticle } from './interfaces/Article'
 
 const url = '/api/articles'
 
@@ -38,7 +38,7 @@ class API {
     }
   }
 
-  async remove(ids: string[]) {
+  async remove(ids: Article['id'][]) {
     try {
       const response = await fetch(url, {
         method: 'DELETE',
@@ -47,11 +47,18 @@ class API {
           'Content-Type': 'application/json'
         }
       })
+      if (response.status === 400) {
+        const message = await response.text()
+        throw new Error(message)
+      }
       if (response.status >= 400) {
         throw new Error('Erreur Technique')
       }
     } catch (err) {
       console.log('err: ', err)
+      if (err instanceof Error) {
+        throw err
+      }
       throw new Error('Erreur Technique')
     }
   }
