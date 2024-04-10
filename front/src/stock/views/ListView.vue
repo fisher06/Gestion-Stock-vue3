@@ -4,6 +4,7 @@ import type { Article } from '@gestionstock/commons'
 import { useArticleStore } from '../store/ArticleStore'
 import AsyncButton from '@/components/AsyncButton.vue'
 import { computed, ref } from 'vue'
+import MainTitle from '@/components/MainTitle.vue'
 
 const selectedArticles = ref(new Set<Article>())
 const errorMsg = ref('')
@@ -53,7 +54,7 @@ initialize()
 
 <template>
   <main>
-    <h1>Liste des articles</h1>
+    <MainTitle>Liste des articles</MainTitle>
     <div class="content">
       <nav>
         <AsyncButton

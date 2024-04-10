@@ -1,8 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MainTitle from '@/components/MainTitle.vue'
+</script>
 
 <template>
   <main>
-    <h1>Gérer efficacement votre stock !</h1>
+    <MainTitle>Gérer efficacement votre stock !</MainTitle>
     <router-link to="/stock" class="button primary">
       <span>Voir le stock</span>
       <fa-icon icon="fa-solid fa-angle-right" />

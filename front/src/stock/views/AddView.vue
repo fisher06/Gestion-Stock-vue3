@@ -4,6 +4,7 @@ import type { NewArticle } from '@gestionstock/commons'
 import { useArticleStore } from '../store/ArticleStore'
 import { ref } from 'vue'
 import { vFocus } from '@/directives/vFocus'
+import MainTitle from '@/components/MainTitle.vue'
 
 const newArticle = ref<NewArticle>({
   name: 'Truc',
@@ -33,7 +34,7 @@ const handleSubmit = async (): Promise<void> => {
 
 <template>
   <main>
-    <h1>Ajouter un article</h1>
+    <MainTitle>Ajouter un article</MainTitle>
     <form @submit.prevent="handleSubmit()">
       <label>
         <span>Nom</span>
