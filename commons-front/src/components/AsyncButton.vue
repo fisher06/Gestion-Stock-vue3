@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { FontAwesomeIcon as FaIcon } from '@fortawesome/vue-fontawesome'
+import { faCircleNotch, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
-  icon: string
+  icon: object | string[] | string | IconDefinition
   action: () => Promise<void>
 }>()
 
@@ -29,10 +31,12 @@ const doAction = async () => {
     isDoing.value = false
   }
 }
+
+const iconComputed = computed(() => (isDoing.value ? faCircleNotch : props.icon))
 </script>
 
 <template>
   <button @click="doAction" :disabled="isDoing">
-    <fa-icon :icon="isDoing ? 'fa-solid fa-circle-notch' : props.icon" :spin="isDoing" />
+    <fa-icon :icon="iconComputed" :spin="isDoing" />
   </button>
 </template>

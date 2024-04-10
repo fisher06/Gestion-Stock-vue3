@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import type { Article } from '@gestionstock/commons'
 import { useArticleStore } from '../store/ArticleStore'
-import AsyncButton from '@/components/AsyncButton.vue'
+import { AsyncButton } from '@gestionstock/commons-front'
 import { computed, ref } from 'vue'
 import MainTitle from '@/components/MainTitle.vue'
 

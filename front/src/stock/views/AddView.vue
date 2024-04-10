@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import type { NewArticle } from '@gestionstock/commons'
 import { useArticleStore } from '../store/ArticleStore'
 import { ref } from 'vue'
-import { vFocus } from '@/directives/vFocus'
+import { vFocus } from '@gestionstock/commons-front'
 import MainTitle from '@/components/MainTitle.vue'
 
 const newArticle = ref<NewArticle>({

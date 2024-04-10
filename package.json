@@ -10,7 +10,7 @@
   "author": "Fisher X",
   "workspaces": [
     "commons",
-    "front-commons",
+    "commons-front",
     "front",
     "back"
   ]
