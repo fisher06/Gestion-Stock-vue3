@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../store/ArticleStore'
 import { ref } from 'vue'
+import { vFocus } from '@/directives/vFocus'
 
 const newArticle = ref<NewArticle>({
   name: 'Truc',
@@ -36,7 +37,7 @@ const handleSubmit = async (): Promise<void> => {
     <form @submit.prevent="handleSubmit()">
       <label>
         <span>Nom</span>
-        <input type="text" v-model="newArticle.name" />
+        <input type="text" v-model="newArticle.name" v-focus="'selectAll'" />
         <span class="error"></span>
       </label>
       <label>
