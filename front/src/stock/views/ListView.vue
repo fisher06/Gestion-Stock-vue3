@@ -54,7 +54,9 @@ initialize()
 
 <template>
   <main>
-    <MainTitle>Liste des articles</MainTitle>
+    <MainTitle>
+      <template v-slot:title>Liste des articles</template>
+    </MainTitle>
     <div class="content">
       <nav>
         <AsyncButton

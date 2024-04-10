@@ -4,7 +4,9 @@ import MainTitle from '@/components/MainTitle.vue'
 
 <template>
   <main>
-    <MainTitle>Gérer efficacement votre stock !</MainTitle>
+    <MainTitle>
+      <template v-slot:title>Gérer efficacement votre stock !</template>
+    </MainTitle>
     <router-link to="/stock" class="button primary">
       <span>Voir le stock</span>
       <fa-icon icon="fa-solid fa-angle-right" />

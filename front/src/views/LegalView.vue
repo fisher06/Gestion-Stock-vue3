@@ -3,7 +3,9 @@ import MainTitle from '@/components/MainTitle.vue'
 </script>
 <template>
   <main>
-    <MainTitle>Mentions Légales</MainTitle>
+    <MainTitle>
+      <template v-slot:title>Mentions Légales</template>
+    </MainTitle>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum veritatis in soluta eius
       eligendi a eos corporis itaque voluptates vitae corrupti delectus et, doloremque odit sapiente

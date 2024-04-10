@@ -34,7 +34,9 @@ const handleSubmit = async (): Promise<void> => {
 
 <template>
   <main>
-    <MainTitle>Ajouter un article</MainTitle>
+    <MainTitle>
+      <template v-slot:title>Ajouter un article</template>
+    </MainTitle>
     <form @submit.prevent="handleSubmit()">
       <label>
         <span>Nom</span>

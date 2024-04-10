@@ -5,7 +5,7 @@ import { onMounted, useSlots } from 'vue'
 const slots = useSlots()
 
 onMounted(() => {
-  const slotContent = slots.default?.()[0].children
+  const slotContent = slots['title']?.()[0].children
   window.document.title = `Gestion Stock - ${slotContent}`
 })
 
@@ -16,6 +16,6 @@ onUnmounted(() => {
 
 <template>
   <h1>
-    <slot></slot>
+    <slot name="title"></slot>
   </h1>
 </template>
