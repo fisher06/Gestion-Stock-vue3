@@ -1,11 +1,18 @@
 {
-  "name": "@gestion-stock/commons",
+  "name": "@gestionstock/commons",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "keywords": [],
-  "author": "Fisher X",
-  "private": true
+  "author": "",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.4.4"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

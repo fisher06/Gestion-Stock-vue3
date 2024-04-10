@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "ES2015",
+    "strict": true,
+    "types": [],
+    "declaration": true,
+    "sourceMap": true,
+    "module": "NodeNext"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

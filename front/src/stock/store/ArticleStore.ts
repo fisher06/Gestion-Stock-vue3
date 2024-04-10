@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Article, NewArticle } from '../interfaces/Article'
+import type { Article, NewArticle } from '@gestionstock/commons'
 import { api } from '../api'
 import { ref } from 'vue'
 

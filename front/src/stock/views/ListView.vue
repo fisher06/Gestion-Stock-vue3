@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import type { Article } from '../interfaces/Article'
+import type { Article } from '@gestionstock/commons'
 import { useArticleStore } from '../store/ArticleStore'
 import AsyncButton from '@/components/AsyncButton.vue'
 import { computed, ref } from 'vue'

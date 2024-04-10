@@ -1,6 +1,6 @@
 import express from "express";
 import { randomUUID } from "node:crypto";
-import { Article, NewArticle } from "./interfaces/Article";
+import type { Article, NewArticle } from "@gestionstock/commons";
 
 const app = express.Router();
 

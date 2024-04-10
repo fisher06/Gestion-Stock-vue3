@@ -1,5 +1,5 @@
-import { sleep } from '@/utils/misc'
-import type { Article, NewArticle } from './interfaces/Article'
+import { sleep } from '@gestionstock/commons'
+import type { Article, NewArticle } from '@gestionstock/commons'
 
 const url = '/api/articles'
 
