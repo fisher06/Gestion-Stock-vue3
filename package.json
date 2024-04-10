@@ -1,0 +1,17 @@
+{
+  "name": "gestion-stock",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo du projet",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Fisher X",
+  "workspaces": [
+    "commons",
+    "front-commons",
+    "front",
+    "back"
+  ]
+}
