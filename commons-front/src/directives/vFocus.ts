@@ -1,12 +1,11 @@
 import type { Directive } from 'vue'
 
-type FocusValue = 'selectAll' | 'focus'
+export type FocusArgument = 'focus' | 'selectAll'
 
-export const vFocus: Directive<HTMLInputElement, FocusValue | undefined> = {
+export const vFocus: Directive<HTMLInputElement, FocusArgument | undefined> = {
   mounted: (el, binding) => {
-    console.log('binding: ', binding)
-    const value = binding.value
-    if (value === 'selectAll' && el instanceof HTMLElement) {
+    console.log('el: ', el)
+    if (binding.value === 'selectAll') {
       el.select()
       return
     }

@@ -18,9 +18,9 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/main.ts'),
-      name: 'FrontCommons',
+      name: 'CommonsFront',
       // the proper extensions will be added
-      fileName: 'front-commons'
+      fileName: 'commons-front'
     },
     rollupOptions: {
       external: ['vue', '@fortawesome/vue-fontawesome', '@fortawesome/free-solid-svg-icons'],
